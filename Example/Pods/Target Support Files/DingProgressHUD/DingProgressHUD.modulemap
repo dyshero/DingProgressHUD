@@ -1,0 +1,6 @@
+framework module DingProgressHUD {
+  umbrella header "DingProgressHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}

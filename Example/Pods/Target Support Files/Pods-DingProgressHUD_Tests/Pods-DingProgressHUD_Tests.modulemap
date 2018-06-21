@@ -1,0 +1,6 @@
+framework module Pods_DingProgressHUD_Tests {
+  umbrella header "Pods-DingProgressHUD_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_DingProgressHUD_Example {
+  umbrella header "Pods-DingProgressHUD_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,16 @@
+PODS:
+  - DingProgressHUD (0.1.0)
+
+DEPENDENCIES:
+  - DingProgressHUD (from `../`)
+
+EXTERNAL SOURCES:
+  DingProgressHUD:
+    :path: ../
+
+SPEC CHECKSUMS:
+  DingProgressHUD: 32754b6b30d0a382d383f36f31f1dfd3d53e0793
+
+PODFILE CHECKSUM: 15a3f592f2ce104ab99c6e4a827c5d462fded070
+
+COCOAPODS: 1.3.1
