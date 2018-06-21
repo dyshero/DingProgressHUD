@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'DingProgressHUD'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of DingProgressHUD.'
+  s.summary          = '一个简单的加载等待框及系统弹窗.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -31,10 +31,12 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'DingProgressHUD/Classes/**/*'
+
+  s.resources = "DingProgressHUD/DingProgressHUD.bundle"
   
-  # s.resource_bundles = {
-  #   'DingProgressHUD' => ['DingProgressHUD/Assets/*.png']
-  # }
+#s.resource_bundles = {
+#'DingProgressHUD' => ['DingProgressHUD/Assets/*.png']
+#}
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
