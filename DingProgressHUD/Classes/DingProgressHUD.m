@@ -8,10 +8,8 @@
 #import "DingProgressHUD.h"
 
 @interface DingProgressHUD()
-
 @property(nonatomic,strong)UIView *blackAlphaView;
 @property(nonatomic,strong)NSTimer *afterTimer;
-
 @end
 
 @implementation DingProgressHUD
@@ -23,22 +21,20 @@
  @return self
  */
 + (instancetype)ding_showHUDWithStatus:(NSString*)textStr{
-    
     return  [DingProgressHUD ding_showHUDWithStatus:textStr afterDelay:1.2f];
-    
 }
+
 + (instancetype)ding_showHUDWithStatus:(NSString *)textStr afterDelay:(NSTimeInterval)seconds{
-    UIView *view=[UIApplication sharedApplication].keyWindow;
+    UIView *view = [UIApplication sharedApplication].keyWindow;
     DingProgressHUD *hud = [[self alloc] initWithView:view];
     //    hud.isAnimation = YES;
-    hud.title=textStr;
-    
-    hud.showTime=seconds;
-    
+    hud.title = textStr;
+    hud.showTime = seconds;
     [hud configUIWithData];
     [view addSubview:hud];
     return hud;
 }
+
 + (instancetype)ding_showProgressHUD{
     return [DingProgressHUD ding_showProgressHUDToView:[UIApplication sharedApplication].keyWindow];
 }
@@ -52,11 +48,11 @@
 }
 
 + (instancetype)ding_showProgressHUD:(NSString *)textStr afterDelay:(NSTimeInterval)seconds{
-    UIView *view=[UIApplication sharedApplication].keyWindow;
+    UIView *view = [UIApplication sharedApplication].keyWindow;
     DingProgressHUD *hud = [[self alloc] initWithView:view];
-    hud.showTime=seconds;
-    hud.title=textStr;
-    hud.progressHUDStyle=dingShowViewStyleLodingText;
+    hud.showTime = seconds;
+    hud.title = textStr;
+    hud.progressHUDStyle = dingShowViewStyleLodingText;
     [hud configUIWithData];
     [view addSubview:hud];
     return hud;
@@ -75,13 +71,12 @@
     return hud;
 }
 
-
 + (instancetype _Nullable )ding_showAlertHUDTitle:(NSString *_Nullable)textStr subTitle:( NSString * _Nonnull )subTitle buttonTitle:(NSString *_Nullable)buttonTitle alertBlock:(dingProgressHUDAlertBlock _Nullable)alertBlock{
     return [self ding_showAlertHUDTitle:textStr subTitle:subTitle buttonTitles:@[buttonTitle] alertBlock:alertBlock];
 }
+
 + (instancetype)ding_showAlertHUDTitle:(NSString *)textStr subTitle:(NSString *_Nonnull)subTitle buttonTitles:(NSArray*_Nullable)btnTitleArray  alertBlock:(dingProgressHUDAlertBlock _Nullable)alertBlock{
     UIView *view=[UIApplication sharedApplication].keyWindow;
-    
     DingProgressHUD *hud = [[self alloc] initWithView:view];
     hud.title=textStr;
     hud.subTitle=subTitle;
@@ -92,28 +87,29 @@
     [view addSubview:hud];
     return hud;
 }
+
 + (instancetype _Nullable )ding_showIconAlertHUDTitle:(NSString *_Nullable)textStr imageName:(NSString *_Nonnull)imageName buttonTitle:(NSString *_Nullable)buttonTitle alertBlock:(dingProgressHUDAlertBlock _Nullable)alertBlock{
     return [self ding_showIconAlertHUDTitle:textStr imageName:imageName buttonTitles:@[buttonTitle] alertBlock:alertBlock];
-    
 }
+
 + (instancetype _Nullable )ding_showIconAlertHUDTitle:(NSString *_Nullable)textStr imageName:(NSString *_Nonnull)imageName buttonTitles:(NSArray*_Nullable)btnTitleArray  alertBlock:(dingProgressHUDAlertBlock _Nullable )alertBlock{
     UIView *view=[UIApplication sharedApplication].keyWindow;
     
     DingProgressHUD *hud = [[self alloc] initWithView:view];
-    hud.title=textStr;
-    hud.iconName=imageName;
-    hud.buttonTitleArray=btnTitleArray;
+    hud.title = textStr;
+    hud.iconName = imageName;
+    hud.buttonTitleArray = btnTitleArray;
     hud.alertBlock = alertBlock;
-    hud.progressHUDStyle=dingProgressHUDStyleIconAlert;
+    hud.progressHUDStyle = dingProgressHUDStyleIconAlert;
     [hud configUIWithData];
     [view addSubview:hud];
     return hud;
 }
 
-
 + (BOOL)ding_hideProgressHUD{
     return [self ding_hideProgressHUDForView:[UIApplication sharedApplication].keyWindow];
 }
+
 + (BOOL)ding_hideProgressHUDForView:(UIView *)view{
     DingProgressHUD *hud = [self ding_progressHUDForView:view];
     if (hud != nil) {
@@ -122,6 +118,7 @@
     }
     return NO;
 }
+
 + (DingProgressHUD *)ding_progressHUDForView:(UIView *)view {
     NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
     for (UIView *subview in subviewsEnum) {
@@ -132,11 +129,11 @@
     return nil;
 }
 
-+(BOOL)ding_hideAllProgressHUD{
++ (BOOL)ding_hideAllProgressHUD{
     return [self ding_hideAllProgressHUDForView:[UIApplication sharedApplication].keyWindow];
 }
 
-+(BOOL)ding_hideAllProgressHUDForView:(UIView *)view{
++ (BOOL)ding_hideAllProgressHUDForView:(UIView *)view{
     NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
     for (UIView *subview in subviewsEnum) {
         if ([subview isKindOfClass:self]) {
@@ -150,13 +147,11 @@
 
 - (void)commonInit {
     self.backgroundColor=[UIColor clearColor];
-    _showTime=-1;
-    _isAnimation=YES;
-    _blackAlpha=0.5;
-    _isTouchRemove=YES;
-    _progressHUDStyle=dingProgressHUDStyleText;
-    
-    
+    _showTime = -1;
+    _isAnimation = YES;
+    _blackAlpha = 0.5;
+    _isTouchRemove = YES;
+    _progressHUDStyle = dingProgressHUDStyleText;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -181,11 +176,9 @@
 - (void)dealloc {
     [_afterTimer setFireDate:[NSDate distantFuture]];
     [_afterTimer invalidate];
-    _afterTimer=nil;
-    
-    NSLog(@"%s",__func__);
-    
+    _afterTimer = nil;
 }
+
 #pragma mark - 创建UI
 -(void)configUIWithData{
     if(self.showTime>=0){
@@ -193,8 +186,6 @@
     }
     
     self.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    
-    
     self.blackAlphaView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.blackAlphaView.backgroundColor=[UIColor blackColor];
     self.blackAlphaView.clipsToBounds=YES;
@@ -202,13 +193,7 @@
     [self addSubview:self.blackAlphaView];
     
     self.blackAlphaView.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    
-    
     [self ding_configUI];
-    
-    
-    
-    //    [self.blackAlphaView.layer addAnimation:[[self class] ding_transitionAnimationWithSubType:kCATransitionFromBottom withType:kCATransitionFade duration:0.3f] forKey:@"alpha.animation"];
     
     [self.ding_cententView.layer addAnimation:[[self class] ding_transitionAnimationWithSubType:kCATransitionFromTop withType:kCATransitionFade duration:0.3f] forKey:@"animation"];
     
@@ -260,26 +245,20 @@
             break;
     }
     
-    CGFloat leftSpace=(self.frame.size.width-self.contentWidth)/2.0;
-    CGFloat topSpace=( self.frame.size.height-self.contentHeight)/2.0;
+    CGFloat leftSpace = (self.frame.size.width-self.contentWidth)/2.0;
+    CGFloat topSpace = (self.frame.size.height-self.contentHeight)/2.0;
     
-    
-    self.ding_cententView=[[UIView alloc]initWithFrame:CGRectMake(leftSpace, topSpace, self.contentWidth, self.contentHeight)];
-    
+    self.ding_cententView = [[UIView alloc]initWithFrame:CGRectMake(leftSpace, topSpace, self.contentWidth, self.contentHeight)];
     [self addSubview:self.ding_cententView];
     self.ding_cententView.autoresizingMask=UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
-    
-    
-    self.ding_cententView.clipsToBounds=YES;
-    
-    UIImageView *backgroundImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.contentWidth, self.contentHeight)];
-    
+    self.ding_cententView.clipsToBounds = YES;
+    UIImageView *backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.contentWidth, self.contentHeight)];
     NSBundle *bundle = [NSBundle bundleForClass:[DingProgressHUD class]];
     NSURL *url = [bundle URLForResource:@"DingProgressHUD" withExtension:@"bundle"];
     NSBundle *imageBundle = [NSBundle bundleWithURL:url];
     
-    NSString *path = [imageBundle pathForResource:bgImagName ofType:@"png"];
-    backgroundImageView.image =[UIImage imageWithContentsOfFile:path];
+    NSString *path = [imageBundle pathForResource:@"angle-mask" ofType:@"png"];
+    backgroundImageView.image = [UIImage imageWithContentsOfFile:path];
     [self.ding_cententView addSubview:backgroundImageView];
     
     switch (self.progressHUDStyle) {
@@ -311,19 +290,20 @@
         default:
             break;
     }
-    
 }
--(void)ding_createTextUI{
+
+- (void)ding_createTextUI{
     UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, self.contentWidth-20, self.contentHeight-20)];
-    titleLabel.text=self.title;
-    titleLabel.tag=1000;
-    titleLabel.textColor=[UIColor whiteColor];
-    titleLabel.font=[UIFont systemFontOfSize:14];
-    titleLabel.numberOfLines=0;
-    titleLabel.textAlignment=NSTextAlignmentCenter;
-    titleLabel.adjustsFontSizeToFitWidth=YES;
+    titleLabel.text = self.title;
+    titleLabel.tag = 1000;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.numberOfLines = 0;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.adjustsFontSizeToFitWidth = YES;
     [self.ding_cententView addSubview:titleLabel];
 }
+
 -(void)ding_createLodingUI{
     UIImageView *lodingImgView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 28, 28)];
     lodingImgView.image = [UIImage imageNamed:@"ding_loding"];
